@@ -10,7 +10,7 @@
 
 该模型在东南大学 DDS 平台 8 种典型故障条件下实现 **98.75% 准确率**，推理延迟压缩超 50%，展示出强大的诊断性能与工程应用潜力。
 ## 🔍 项目结构
-📁 /data              # 振动信号原始数据（CSV格式），来自东南大学DDS实验平台,去 https://github.com/cathysiyu/Mechanical-datasets 下载即可
-📄 bp测试.py          # 主程序入口，执行完整诊断流程
-📄 hho.py             # 工具函数集合
-📄 数据处理部分，完整版.ipynb      # 数据处理部分，深度学习部分的内容不用管
+- 📁 /data              # 振动信号原始数据（CSV格式），来自东南大学DDS实验平台,去 https://github.com/cathysiyu/Mechanical-datasets 下载即可
+- 📄 bp测试.py          # 主程序入口，执行完整诊断流程
+- 📄 hho.py             # 工具函数集合
+- 📄 数据处理部分，完整版.ipynb      # 数据处理部分，深度学习部分的内容不用管

@@ -1,16 +1,40 @@
-# Southeast-University-Gearbox
-该项目使用DWT-RF+HHO-bp神经网络来实现故障诊断，供大家学习。
-## 📘 项目简介
+# SEUgearbox
 
-混合动力拖拉机广泛应用于现代农业，其核心部件——混合动力耦合器，常因复杂负载与恶劣工况发生齿轮与轴承故障。为实现高效、可靠的智能故障诊断，本文提出了一种基于 **DWT-RF 特征提取和筛选 + 改进 HHO-BP 神经网络** 的故障诊断模型：
+Gearbox fault diagnosis experiments based on wavelet features, random-forest feature selection, and an HHO-optimized BP neural network.
 
-- 离散小波变换（DWT）提取多尺度时频特征；
-- 随机森林（RF）筛选高区分度特征子集；
-- 引入动态阈值、自适应扰动与停滞检测机制改进 HHO 算法，优化 BP 网络超参数。
+## What was improved
 
-该模型在东南大学 DDS 平台 8 种典型故障条件下实现 **98.75% 准确率**，推理延迟压缩超 50%，展示出强大的诊断性能与工程应用潜力。
-## 🔍 项目结构
-- 📁 /data              # 振动信号原始数据（CSV格式），来自东南大学DDS实验平台,去 https://github.com/cathysiyu/Mechanical-datasets 下载即可
-- 📄 bp测试.py          # 主程序入口，执行完整诊断流程
-- 📄 hho.py             # 工具函数集合
-- 📄 数据处理部分，完整版.ipynb      # 数据处理部分，深度学习部分的内容不用管
+- Reworked the HHO implementation with input validation, deterministic seeding, and clearer progress reporting.
+- Turned the training script into a reusable CLI instead of a one-off notebook export.
+- Added robust handling for both normal Chinese column names and the mojibake column names already present in the notebook export.
+- Documented dependencies and added a small optimizer regression test.
+
+## Repository layout
+
+- `BP测试.py`: training entry point for the HHO-BP classifier.
+- `hho.py`: Harris Hawks Optimization implementation.
+- `数据处理部分，完整版.ipynb`: original data processing notebook exported from the author workflow.
+- `requirements.txt`: Python dependencies for the training script and tests.
+- `tests/test_hho.py`: minimal sanity test for the optimizer.
+
+## Expected dataset
+
+The training script expects a CSV named `features_reconstructed_simplified_df.csv` by default. It should contain:
+
+- 9 selected feature columns used by the classifier
+- 1 label column named either `故障类别` or the notebook's existing mojibake equivalent
+
+If your notebook export still contains mojibake column names, the script will still try to work with it.
+
+## Quick start
+
+```bash
+python -m pip install -r requirements.txt
+python BP测试.py --data features_reconstructed_simplified_df.csv --iters 50 --hawks 20 --plot
+```
+
+## Notes
+
+- The raw dataset is not stored in this repository.
+- The notebook appears to have been saved with encoding issues in several text cells. The Python entry point now avoids depending on those broken labels as much as possible.
+- If you want a full restructuring of the notebook pipeline into standalone modules, that can be done in a follow-up pass.

@@ -1,0 +1,6 @@
+matplotlib>=3.8
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.4
+seaborn>=0.13
+pytest>=8.0
